@@ -1,0 +1,29 @@
+name: Build
+on:
+  push:
+    tags:
+      - "*"
+jobs:
+  build:
+    name: Build theme
+    runs-on: ubuntu-latest
+    env:
+      APNSCP_THEME_PATH: "dist/"
+      THEME: "${{ secrets.THEME }}"
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "lts/erbium"
+          cache: "npm"
+      - run: yarn install
+      - run: yarn global add grunt-cli@1.3.2 node-sass@4.13.1 clean-css-cli@4.3.0
+      - run: mkdir -p ${APNSCP_THEME_PATH}
+      - run: grunt sass exec:postcss exec:clean-css
+      - run: zip --junk-paths "${{ runner.temp }}/${{ secrets.THEME }}.zip" dist/css/*
+      - run: ls -lah
+      - uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: "${{ runner.temp }}/${{ secrets.THEME }}.zip"
