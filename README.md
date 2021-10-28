@@ -42,6 +42,22 @@ SDK contains a definition of a pipeline that performs the build of the theme and
 
 Compiled theme will be spit out to `dist/css/apnscp.css` and you'll find it right in your [artifacts download area](https://docs.gitlab.com/ee/user/project/pipelines/job_artifacts.html#downloading-artifacts).
 
+## Building with Github Actions
+
+Set up a Repository secrets under Settins > Secrets called `THEME`, value should be your theme name. Commit your `.scss` files under `scss/themes` and push a tag with a version name such as `1.0.0`. A workflow will be triggered to perform the theme build and create a new release.
+
+### Built theme quick-install
+
+To install the latest theme version you can run the following commands:
+
+```bash
+cd /usr/local/apnscp/public/css/themes
+THEME_URL=$(curl -s https://api.github.com/repos/thundersquared/apiscp-bootstrap-sdk/releases/latest | jq -r '.assets[] | select(.content_type == "application/zip") | {browser_download_url} | .browser_download_url')
+sudo -u apnscp curl -fsSL $THEME_URL -o theme.zip
+sudo -u apnscp unzip theme.zip
+rm theme.zip
+```
+
 ## Enabling in apnscp
 
 apnscp must be configured with **[style]** => **allow_custom** set to true on config.ini. Once enabled, users will have the option to configure 1 theme to their account. If Global Preferences (todo) are enabled on the account, then this theme may optionally apply to all users on the account.
