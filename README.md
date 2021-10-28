@@ -44,7 +44,7 @@ Compiled theme will be spit out to `dist/css/apnscp.css` and you'll find it righ
 
 ## Building with Github Actions
 
-Set up a Repository secrets under Settins > Secrets called `THEME`, value should be your theme name. Commit your `.scss` files under `scss/themes` and push a tag with a version name such as `1.0.0`. A workflow will be triggered to perform the theme build and create a new release.
+Set up a Repository secret under Settings > Secrets called `THEME`, value should be your theme name. Commit your `.scss` files under `scss/themes` and push a tag with a version name such as `1.0.0`. A workflow will be triggered to perform the theme build and create a new release.
 
 ### Built theme quick-install
 
