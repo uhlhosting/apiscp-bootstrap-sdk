@@ -52,7 +52,7 @@ To install the latest theme version you can run the following commands:
 
 ```bash
 cd /usr/local/apnscp/public/css/themes
-THEME_URL=$(curl -s https://api.github.com/repos/thundersquared/apiscp-bootstrap-sdk/releases/latest | jq -r '.assets[] | select(.content_type == "application/zip") | {browser_download_url} | .browser_download_url')
+THEME_URL=$(curl -s https://api.github.com/repos/apisnetworks/apiscp-bootstrap-sdk/releases/latest | jq -r '.assets[] | select(.content_type == "application/zip") | {browser_download_url} | .browser_download_url')
 sudo -u apnscp curl -fsSL $THEME_URL -o theme.zip
 sudo -u apnscp unzip theme.zip
 rm theme.zip
